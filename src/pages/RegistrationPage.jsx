@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import shortid from 'shortid';
 import { Context } from '../context/context';
 import useInput from '../hooks/useInput';
 import timezone from '../utils/timezone';
@@ -40,7 +39,6 @@ export const RegistrationPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    localStorage.setItem('id', shortid.generate());
     const credentials = {
       phone: phone.value,
       password: password.value,

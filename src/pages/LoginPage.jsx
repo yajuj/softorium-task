@@ -42,7 +42,7 @@ export const LoginPage = () => {
             </Form.Group>
 
             <Form.Group className='mb-3' controlId='password'>
-              <Form.Label>Парооль</Form.Label>
+              <Form.Label>Пароль</Form.Label>
               <Form.Control
                 isValid={password.valid.isEmpty}
                 value={password.value}

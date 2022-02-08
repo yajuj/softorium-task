@@ -12,6 +12,7 @@ function App() {
       setRoute('login');
     }
   }, []);
+
   return (
     <div className='app'>
       {route === 'registration' ? (

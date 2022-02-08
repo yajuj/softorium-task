@@ -24,7 +24,7 @@ const UserPage = () => {
           </ListGroupItem>
           <ListGroupItem>Дата рождения {userData.birthday}</ListGroupItem>
           <ListGroupItem>
-            Дата регистрации{' '}
+            Дата регистрации
             {date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()}
           </ListGroupItem>
           <ListGroupItem>Часовой пояс {userData.time_zone}</ListGroupItem>
@@ -35,13 +35,3 @@ const UserPage = () => {
 };
 
 export default UserPage;
-
-// "id": "UUID пользователя",
-// "phone": "номер телефона в международном формате",
-// "name": "имя",
-// "email": "адрес email",
-// "birthday": "дата рождения",
-// "avatar": "ссылка на фото",
-// "dt_create": "время регистрации",
-// "enabled": "флаг активности",
-// "time_zone": "+03"

@@ -1,4 +1,5 @@
 import React from 'react';
+import shortid from 'shortid';
 import api from '../http/api';
 
 export const Context = React.createContext();
@@ -10,11 +11,14 @@ const ContextProvider = ({ children }) => {
   const [route, setRoute] = React.useState('registration');
 
   const signup = async payload => {
+    localStorage.setItem('id', shortid.generate());
     try {
       setLoading(true);
       const response = await api.post('/signup', payload);
+      setError('');
       setRoute('login');
     } catch (error) {
+      localStorage.removeItem('id');
       if (error.response.data.detail) {
         setError(error.response.data.detail);
       } else {
@@ -30,6 +34,7 @@ const ContextProvider = ({ children }) => {
       setLoading(true);
       const response = await api.post('/signin', payload);
       localStorage.setItem('bearer', response.data.access_token);
+      setError('');
       setRoute('userpage');
     } catch (error) {
       if (error.response.data.detail) {
