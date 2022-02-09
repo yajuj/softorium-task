@@ -4,12 +4,17 @@ import { Context } from '../context/context';
 
 const UserPage = () => {
   const { fetchMe, userData, loading } = React.useContext(Context);
+
   React.useEffect(() => {
     document.title = 'Профиль пользователя';
     fetchMe();
+    // eslint-disable-next-line
   }, []);
+
   if (loading) return <p>Загрузка...</p>;
+
   const date = new Date(userData.dt_create);
+
   return (
     <div>
       <Card style={{ width: '18rem' }}>

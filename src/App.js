@@ -11,7 +11,7 @@ function App() {
     if (localStorage.getItem('id')) {
       setRoute('login');
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <div className='app'>

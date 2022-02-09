@@ -14,7 +14,7 @@ const ContextProvider = ({ children }) => {
     localStorage.setItem('id', shortid.generate());
     try {
       setLoading(true);
-      const response = await api.post('/signup', payload);
+      await api.post('/signup', payload);
       setError('');
       setRoute('login');
     } catch (error) {
