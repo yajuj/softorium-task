@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Context } from '../context/context';
 
-const UserPage = () => {
-  const { fetchMe, userData, loading } = React.useContext(Context);
+export const UserPage = () => {
+  const { fetchMe, userData, loading, logout } = React.useContext(Context);
 
   React.useEffect(() => {
     document.title = 'Профиль пользователя';
@@ -34,9 +34,8 @@ const UserPage = () => {
           </ListGroupItem>
           <ListGroupItem>Часовой пояс {userData.time_zone}</ListGroupItem>
         </ListGroup>
+        <Button onClick={logout}>Выйти</Button>
       </Card>
     </div>
   );
 };
-
-export default UserPage;

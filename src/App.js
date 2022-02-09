@@ -3,15 +3,10 @@ import React from 'react';
 import { Context } from './context/context';
 import { LoginPage } from './pages/LoginPage';
 import { RegistrationPage } from './pages/RegistrationPage';
-import UserPage from './pages/UserPage';
+import { UserPage } from './pages/UserPage';
 
 function App() {
-  const { route, setRoute } = React.useContext(Context);
-  React.useEffect(() => {
-    if (localStorage.getItem('id')) {
-      setRoute('login');
-    }
-  }, []); // eslint-disable-line
+  const { route } = React.useContext(Context);
 
   return (
     <div className='app'>

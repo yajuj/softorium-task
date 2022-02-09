@@ -7,7 +7,7 @@ import timezone from '../utils/timezone';
 export const RegistrationPage = () => {
   React.useEffect(() => {
     document.title = 'Регистрация';
-  }, []); // eslint-disable-line
+  }, []);
 
   const { signup, loading, error } = React.useContext(Context);
 

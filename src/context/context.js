@@ -10,6 +10,17 @@ const ContextProvider = ({ children }) => {
   const [userData, setUserData] = React.useState(null);
   const [route, setRoute] = React.useState('registration');
 
+  React.useEffect(() => {
+    if (localStorage.getItem('id')) {
+      if (localStorage.getItem('bearer')) {
+        setLoading(true);
+        setRoute('user');
+      } else {
+        setRoute('login');
+      }
+    }
+  }, [setLoading, setRoute]);
+
   const signup = async payload => {
     localStorage.setItem('id', shortid.generate());
     try {
@@ -20,7 +31,12 @@ const ContextProvider = ({ children }) => {
     } catch (error) {
       localStorage.removeItem('id');
       if (error.response.data.detail) {
-        setError(error.response.data.detail);
+        if (Array.isArray(error.response.data.detail)) {
+          // отлавливаю ошибку с номером телефона.
+          setError(error.response.data.detail[0].msg);
+        } else {
+          setError(error.response.data.detail);
+        }
       } else {
         setError('Произошла ошибка');
       }
@@ -38,13 +54,23 @@ const ContextProvider = ({ children }) => {
       setRoute('userpage');
     } catch (error) {
       if (error.response.data.detail) {
-        setError(error.response.data.detail);
+        if (Array.isArray(error.response.data.detail)) {
+          // отлавливаю ошибку с номером телефона.
+          setError(error.response.data.detail[0].msg);
+        } else {
+          setError(error.response.data.detail);
+        }
       } else {
         setError('Произошла ошибка');
       }
     } finally {
       setLoading(false);
     }
+  };
+  const logout = () => {
+    localStorage.removeItem('id');
+    localStorage.removeItem('bearer');
+    setRoute('registration');
   };
 
   const fetchMe = async () => {
@@ -53,7 +79,7 @@ const ContextProvider = ({ children }) => {
       const response = await api.get('/users/me');
       setUserData(response.data);
     } catch (error) {
-      if (error.response.data.detail) {
+      if (error?.response?.data?.detail) {
         setError(error.response.data.detail);
       } else {
         setError('Произошла ошибка');
@@ -71,6 +97,7 @@ const ContextProvider = ({ children }) => {
         error,
         signup,
         signin,
+        logout,
         route,
         setRoute,
         fetchMe,
